@@ -14,13 +14,21 @@ public class Menu {
 
         switch (option) {
             case 1 -> app.createField();
-            case 2 -> app.updateField();
+            case 2 -> app.showsField();
             default -> System.err.println("Unexpected Value: " + option + "choose the appropriate option");
         }
 
     }
 
-    public boolean isYes(String validation) {
+    public void dataFileMenu (App app, String databaseName) {
+        System.out.println(databaseName);
+        System.out.println("Capital: " + app.getCapital());
+        System.out.println("Product: " + app.getProduct());
+        System.out.println("Revenue: " + app.getRevenue());
+        System.out.println("Profit: " + app.getProfit());
+    }
+
+    public boolean getYesOrNo(String validation) {
         System.out.print(validation + " (y/n): ");
         String answer = input.next().toLowerCase();
         return answer.equals("y");
@@ -37,4 +45,5 @@ public class Menu {
             System.err.println("tidak bisa clear screen");
          }
     }
+
 }
