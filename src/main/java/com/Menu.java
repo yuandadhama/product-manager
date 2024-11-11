@@ -14,7 +14,10 @@ public class Menu {
 
         switch (option) {
             case 1 -> app.createField();
-            case 2 -> app.showsField();
+            case 2 -> {
+                boolean isFromNewFile = false;
+                app.showsField(isFromNewFile, null);
+            }
             default -> System.err.println("Unexpected Value: " + option + "choose the appropriate option");
         }
 
@@ -26,6 +29,8 @@ public class Menu {
         System.out.println("Product: " + app.getProduct());
         System.out.println("Revenue: " + app.getRevenue());
         System.out.println("Profit: " + app.getProfit());
+
+        
     }
 
     public boolean getYesOrNo(String validation) {

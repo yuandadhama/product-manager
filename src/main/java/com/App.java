@@ -89,9 +89,11 @@ public class App {
             e.printStackTrace();
         }
 
+        // apakah user ingin menampilkan file yang baru saja dibuat?
         if (menu.getYesOrNo(databaseName + " is created, do you want to open it?")) {
             menu.clearScreen();
-            this.showsField();
+            boolean fromNewFile = true;
+            this.showsField(fromNewFile, databaseName);
         } else {
             menu.clearScreen();
             menu.main(this);
@@ -100,12 +102,17 @@ public class App {
         input.close();
     }
 
-    public void showsField() {
+    public void showsField(boolean isFromNewFile, String dbName) {
         Scanner input = new Scanner(System.in);
         Menu menu = new Menu();
+        String databaseName;
 
-        System.out.print("Masukkan Nama Database (DB-<dd-mm-yy>): ");
-        String databaseName = input.next();
+        if (isFromNewFile) {
+            databaseName = dbName;
+        } else {
+            System.out.print("Input database name file (DB-<dd-mm-yy>): ");
+            databaseName = input.next();
+        }
 
         // alamat folder untuk db
         String directoryPath = "src/main/resources/database/";
