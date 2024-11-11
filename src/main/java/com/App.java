@@ -6,7 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class App {
     // modal
@@ -37,6 +38,7 @@ public class App {
         return profit;
     }
 
+    @SuppressWarnings("unchecked")
     public void createField() {
         Scanner input = new Scanner(System.in);
         Menu menu = new Menu();
@@ -54,22 +56,20 @@ public class App {
 
         // yakinkan user dengan data yang akan diinput
         if (!menu.getYesOrNo("Are you sure with the data")) {
-            menu.clearScreen();
             menu.main(this);
-
             input.close();
             return;
         }
 
         // pembuatan db untuk kelola data
-        System.out.print("Masukkan Nama Database (DB-<dd-mm-yy>): ");
+        System.out.print("Input file database name (DB-<dd-mm-yyyy>): ");
         String databaseName = input.next();
 
         // alamat folder untuk db
         String directoryPath = "src/main/resources/database/";
         String dbFilePath = directoryPath + databaseName + ".json";
 
-        // buat json sebagai db, input data ke json
+        // buat file json sebagai db baru, input data ke json
         JSONObject db = new JSONObject();
         db.put("capital", capital);
         db.put("product", product);
@@ -80,20 +80,20 @@ public class App {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs();
+
         }
 
         // simpan ke file json
         try (FileWriter fileWriter = new FileWriter(dbFilePath)) {
-            fileWriter.write(db.toString(4));
+            fileWriter.write(db.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
+        // apakah user ingin membuka file yang baru saja dibuat?
         if (menu.getYesOrNo(databaseName + " is created, do you want to open it?")) {
-            menu.clearScreen();
-            this.showsField();
+            menu.dataFileMenu(this, databaseName);
         } else {
-            menu.clearScreen();
             menu.main(this);
         }
 
@@ -104,7 +104,7 @@ public class App {
         Scanner input = new Scanner(System.in);
         Menu menu = new Menu();
 
-        System.out.print("Masukkan Nama Database (DB-<dd-mm-yy>): ");
+        System.out.print("Input database file to open (DB-<dd-mm-yyyy>): ");
         String databaseName = input.next();
 
         // alamat folder untuk db
@@ -114,15 +114,34 @@ public class App {
         // cek file json, jika file ada, baca file json
         if (new File(dbFilePath).exists()) {
             try (FileReader fileReader = new FileReader(dbFilePath)) {
-                JSONObject db = new JSONObject(fileReader);
+                JSONParser jsonParser = new JSONParser();
+                try {
+                    JSONObject db = (JSONObject) jsonParser.parse
+                    (fileReader);   
 
-                // tampilkan data
-                menu.dataFileMenu(this, databaseName);
+                    // ambil data dari file database untuk ditampilkan
+                    capital = (int) db.get("capital");
+                    System.out.println(capital);
+
+                    product = (int) db.get("product");
+                    System.out.println(product);
+                    revenue = (int) db.get("revenue");
+                    profit = (int) db.get("profit");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }                
+                // menu.dataFileMenu(this, databaseName);
             } catch (IOException e) {
+                System.out.println("test error muncul");
                 e.printStackTrace();
             }
         } else {
             System.err.println("Database " + databaseName + " not found");
+            if (menu.getYesOrNo("Do you want to continue?")) {
+                menu.main(this);
+            } else {
+                System.exit(0);
+            }
         }
 
         input.close();

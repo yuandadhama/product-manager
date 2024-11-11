@@ -5,9 +5,10 @@ import java.util.Scanner;
 public class Menu {
     Scanner input = new Scanner(System.in);
     public void main(App app) {
+        this.clearScreen();
         System.out.println("Main Menu:");
         System.out.println("(1) Create New Field");
-        System.out.println("(2) Update Existed Field");
+        System.out.println("(2) Show Existed Field");
 
         System.out.print("Choose Option: ");
         int option = input.nextInt();
@@ -15,18 +16,54 @@ public class Menu {
         switch (option) {
             case 1 -> app.createField();
             case 2 -> app.showsField();
-            default -> System.err.println("Unexpected Value: " + option + "choose the appropriate option");
+            default -> {
+                System.err.println("Unexpected Value: " + option + "choose the appropriate option");
+                this.main(app);
+            }
         }
 
     }
 
     public void dataFileMenu (App app, String databaseName) {
-        System.out.println(databaseName);
+        this.clearScreen();
+        System.out.println("========== " + databaseName + " ==========");
         System.out.println("Capital: " + app.getCapital());
         System.out.println("Product: " + app.getProduct());
         System.out.println("Revenue: " + app.getRevenue());
         System.out.println("Profit: " + app.getProfit());
+        System.out.println("========== Option ==========");
+        System.out.println("(1) Add Customer");
+        System.out.println("(2) Restock");
+        System.out.println("(3) Info Seller");
+        System.out.println("(4) Back to Main Menu");
+
+        System.out.print("Choose Option: ");
+        int option = input.nextInt();
+
+        switch (option) {
+            case 1 -> this.addCustomer();
+            case 2 -> this.restock();
+            case 3 -> this.infoSeller();
+            default -> {
+                this.clearScreen();
+                System.err.println("Unexpected Value: " + option + "choose the appropriate option");
+                this.dataFileMenu(app, databaseName);
+            }
+        }
     }
+
+    public void addCustomer() {
+    
+    }
+
+    public void restock() {
+    
+    }
+
+    public void infoSeller() {
+    
+    }
+
 
     public boolean getYesOrNo(String validation) {
         System.out.print(validation + " (y/n): ");
