@@ -1,0 +1,16 @@
+{
+  "capital": 50000,
+  "product": 10,
+  "revenue": 0,
+  "profit": 0,
+  "customer": [
+    {
+        "package-one": [
+            "arhan","burhan","rehan"
+        ],
+        "package-two": [
+            "dany, jony, dhamy"
+        ]
+    }
+  ]
+}

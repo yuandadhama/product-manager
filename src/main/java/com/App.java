@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
@@ -12,30 +15,55 @@ import org.json.simple.parser.JSONParser;
 public class App {
     // modal
     private int capital = 0;
-
     public int getCapital() {
         return capital;
+    }
+    public void setCapital(int capital) {
+        this.capital = capital;
     }
 
     // produk
     private int product = 0;
-
     public int getProduct() {
         return product;
     }
+    public void setProduct(int product) {
+        this.product = product;
+    }
 
-    // laba kotor
+    // pendapatan
     private int revenue = 0;
-
     public int getRevenue() {
         return revenue;
+    }
+    public void setRevenue(int revenue) {
+        this.revenue = revenue;
     }
 
     // untung
     private int profit = 0;
-
     public int getProfit() {
         return profit;
+    }
+    public void setProfit(int profit) {
+        this.profit = profit;
+    }
+
+    private String[] customerPackageOne = {};
+    public List<String> getCustomerPackageOne() {
+        return new ArrayList<>(Arrays.asList(customerPackageOne));
+    }
+    public void setCustomerPackageOne(List<String> updatedStrings) {
+        this.customerPackageOne= updatedStrings.toArray(new String[0]);
+    }
+
+
+    private String[] customerPackageTwo = {};
+    public List<String> getCustomerPackageTwo() {
+        return new ArrayList<>(Arrays.asList(customerPackageTwo));
+    }
+    public void setCustomerPackageTwo(List<String> updatedStrings) {
+        this.customerPackageTwo = updatedStrings.toArray(new String[0]);
     }
 
     @SuppressWarnings("unchecked")

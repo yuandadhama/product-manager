@@ -41,7 +41,7 @@ public class Menu {
         int option = input.nextInt();
 
         switch (option) {
-            case 1 -> this.addCustomer();
+            case 1 -> this.addCustomer(app);
             case 2 -> this.restock();
             case 3 -> this.infoSeller();
             default -> {
@@ -52,8 +52,47 @@ public class Menu {
         }
     }
 
-    public void addCustomer() {
-    
+    public void addCustomer(App app) {
+        this.clearScreen();
+
+        System.out.println("Which package?");
+        System.out.println("(1) Buy 1 product | 8k");
+        System.out.println("(2) Buy 2 products | 15k");
+        
+        System.out.print("Choose Option: ");
+        int option = input.nextInt();
+
+        System.out.print("Input customer name: ");
+        String customerName = input.next();
+
+        int revenue = app.getRevenue();
+        int product = app.getProduct();
+
+        switch (option) {
+            case 1 -> {
+                revenue += 8000;
+                product -= 1;
+            }
+            case 2 -> {
+                revenue += 15000;
+                product -= 2;
+            }
+            default -> {
+                System.err.println("Unexpected Value: " + option + "choose the appropriate option");
+                this.addCustomer(app);
+            }
+        }
+
+        System.out.println("Customer: " + customerName);
+        System.out.println("Package: " + option);
+
+
+        if (this.getYesOrNo("Are you sure the data is correct?")) {
+            app.setRevenue(revenue);
+            app.setProduct(product);
+        } else {
+            
+        }
     }
 
     public void restock() {
