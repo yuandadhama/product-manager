@@ -41,7 +41,7 @@ public class Menu {
         int option = input.nextInt();
 
         switch (option) {
-            case 1 -> this.addCustomer(app);
+            case 1 -> this.addCustomer(app, databaseName);
             case 2 -> this.restock();
             case 3 -> this.infoSeller();
             default -> {
@@ -52,7 +52,7 @@ public class Menu {
         }
     }
 
-    public void addCustomer(App app) {
+    public void addCustomer(App app, String databaseName) {
         this.clearScreen();
 
         System.out.println("Which package?");
@@ -79,7 +79,7 @@ public class Menu {
             }
             default -> {
                 System.err.println("Unexpected Value: " + option + "choose the appropriate option");
-                this.addCustomer(app);
+                this.addCustomer(app, databaseName);
             }
         }
 
@@ -88,15 +88,25 @@ public class Menu {
 
 
         if (this.getYesOrNo("Are you sure the data is correct?")) {
+            switch (option) {
+               case 1 -> app.addCustomerPackageOne(customerName);
+               case 2 -> app.addCustomerPackageTwo(customerName);
+            }
             app.setRevenue(revenue);
             app.setProduct(product);
+
+            if (app.getRevenue() > app.getCapital()) {
+                int setProfit = app.getRevenue() - app.getCapital();
+                app.setProfit(setProfit);
+            }
+            this.dataFileMenu(app, databaseName);
         } else {
-            
+            this.addCustomer(app, databaseName);
         }
     }
 
     public void restock() {
-    
+
     }
 
     public void infoSeller() {
