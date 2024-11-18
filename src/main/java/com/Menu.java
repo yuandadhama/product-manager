@@ -11,8 +11,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.App.Seller;
-
 public class Menu {
     Scanner input = new Scanner(System.in);
 
@@ -56,6 +54,7 @@ public class Menu {
             case 1 -> this.addCustomer(app, databaseName);
             case 2 -> this.restock();
             case 3 -> this.infoSeller();
+            case 4 -> this.main(app);
             default -> {
                 this.clearScreen();
                 System.err.println("Unexpected Value: " + option + "choose the appropriate option");
@@ -138,14 +137,14 @@ public class Menu {
         if (this.getYesOrNo("Are you sure the data is correct?")) {
             switch (option) {
                 case 1 -> {
-                    JSONArray packageOne = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("packageOne");
+                    JSONArray packageOne = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("package-one");
                     packageOne.add(customerName);
-                    ((JSONObject) sellersDb.get(sellerName)).put("packageOne", packageOne);
+                    ((JSONObject) sellersDb.get(sellerName)).put("package-one", packageOne);
                 }
                 case 2 -> {
-                    JSONArray packageOne = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("packageOne");
-                    packageOne.add(customerName);
-                    ((JSONObject) sellersDb.get(sellerName)).put("packageOne", packageOne);
+                    JSONArray packageTwo = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("package-two");
+                    packageTwo.add(customerName);
+                    ((JSONObject) sellersDb.get(sellerName)).put("package-two", packageTwo);
                 }
             }
 
