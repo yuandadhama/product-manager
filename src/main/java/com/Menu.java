@@ -1,9 +1,21 @@
 package com;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.App.Seller;
 
 public class Menu {
     Scanner input = new Scanner(System.in);
+
     public void main(App app) {
         this.clearScreen();
         System.out.println("Main Menu:");
@@ -24,7 +36,7 @@ public class Menu {
 
     }
 
-    public void dataFileMenu (App app, String databaseName) {
+    public void dataFileMenu(App app, String databaseName) {
         this.clearScreen();
         System.out.println("========== " + databaseName + " ==========");
         System.out.println("Capital: " + app.getCapital());
@@ -52,15 +64,52 @@ public class Menu {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void addCustomer(App app, String databaseName) {
         this.clearScreen();
+        JSONObject db = null;
+        JSONObject selectedSeller = null;
+        JSONObject sellersDb = null;
+        String sellerName = null;
 
         System.out.println("Which package?");
         System.out.println("(1) Buy 1 product | 8k");
         System.out.println("(2) Buy 2 products | 15k");
-        
+
         System.out.print("Choose Option: ");
         int option = input.nextInt();
+
+        String dbFilePath = app.getDbFilePath();
+        try (FileReader fileReader = new FileReader(dbFilePath)) {
+            JSONParser jsonParser = new JSONParser();
+            try {
+                db = (JSONObject) jsonParser.parse(fileReader);
+                sellersDb = (JSONObject) db.get("sellers");
+
+                List<String> sellerKeys = new ArrayList<>(sellersDb.keySet());
+
+                int order = 1;
+                for (String seller : sellerKeys) {
+                    System.out.println("("+order+") " + seller);
+                    order++;
+                }
+
+                System.out.print("Choose seller: ");
+                int sellerIndex = input.nextInt() - 1;
+
+                sellerName = sellerKeys.get(sellerIndex);
+
+                selectedSeller = (JSONObject) sellersDb.get(sellerName);
+
+                System.out.println(selectedSeller);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(0);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.print("Input customer name: ");
         String customerName = input.next();
@@ -85,19 +134,25 @@ public class Menu {
 
         System.out.println("Customer: " + customerName);
         System.out.println("Package: " + option);
-
-
+        
         if (this.getYesOrNo("Are you sure the data is correct?")) {
             switch (option) {
-               case 1 -> app.addCustomerPackageOne(customerName);
-               case 2 -> app.addCustomerPackageTwo(customerName);
+                case 1 -> {
+                    JSONArray packageOne = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("packageOne");
+                    packageOne.add(customerName);
+                    ((JSONObject) sellersDb.get(sellerName)).put("packageOne", packageOne);
+                }
+                case 2 -> {
+                    JSONArray packageOne = (JSONArray) ((JSONObject) sellersDb.get(sellerName)).get("packageOne");
+                    packageOne.add(customerName);
+                    ((JSONObject) sellersDb.get(sellerName)).put("packageOne", packageOne);
+                }
             }
-            app.setRevenue(revenue);
-            app.setProduct(product);
 
-            if (app.getRevenue() > app.getCapital()) {
-                int setProfit = app.getRevenue() - app.getCapital();
-                app.setProfit(setProfit);
+            try (FileWriter fileWriter = new FileWriter(dbFilePath)) {
+                fileWriter.write(db.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             this.dataFileMenu(app, databaseName);
         } else {
@@ -110,9 +165,8 @@ public class Menu {
     }
 
     public void infoSeller() {
-    
-    }
 
+    }
 
     public boolean getYesOrNo(String validation) {
         System.out.print(validation + " (y/n): ");
@@ -123,13 +177,13 @@ public class Menu {
     public void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
-               new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } else {
-               System.out.println("\033\143");
+                System.out.println("\033\143");
             }
-         } catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("tidak bisa clear screen");
-         }
+        }
     }
 
 }

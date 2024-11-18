@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,9 +16,13 @@ public class App {
     private String databaseFileName;
     private String dbDirectoryPath;
     private String dbFilePath;
+    public String getDbFilePath() {
+        return dbFilePath;
+    }
 
+    private int totalSellers;
     // modal
-    private int capital = 0;
+    private int capital;
     public int getCapital() {
         return capital;
     }
@@ -27,7 +32,7 @@ public class App {
     }
 
     // produk
-    private int product = 0;
+    private int product;
     public int getProduct() {
         return product;
     }
@@ -37,7 +42,7 @@ public class App {
     }
 
     // pendapatan
-    private int revenue = 0;
+    private int revenue;
     public int getRevenue() {
         return revenue;
     }
@@ -47,7 +52,7 @@ public class App {
     }
 
     // untung
-    private int profit = 0;
+    private int profit;
     public int getProfit() {
         return profit;
     }
@@ -56,26 +61,7 @@ public class App {
         updateDatabase(dbDirectoryPath, dbFilePath);
     }
 
-    private JSONArray customerPackageOne = new JSONArray();
-    public JSONArray getCustomerPackageOne () {
-        return customerPackageOne;
-    }
     @SuppressWarnings("unchecked")
-    public void addCustomerPackageOne (String customerName) {
-        customerPackageOne.add(customerName);
-        updateDatabase(dbDirectoryPath, dbFilePath);
-    }
-
-    private JSONArray customerPackageTwo = new JSONArray();
-    public JSONArray getCustomerPackageTwo () {
-        return customerPackageTwo;
-    }
-    @SuppressWarnings("unchecked")
-    public void addCustomerPackageTwo (String customerName) {
-        customerPackageTwo.add(customerName);
-        updateDatabase(dbDirectoryPath, dbFilePath);
-    }
-
     public void createField() {
         Scanner input = new Scanner(System.in);
         Menu menu = new Menu();
@@ -87,17 +73,24 @@ public class App {
         System.out.print("Input Total Product: ");
         product = input.nextInt();
 
+        System.out.print("Input how many sellers: ");
+        totalSellers = input.nextInt();
+
         // menu hasil
         System.out.println("capital: " + capital);
         System.out.println("Products: " + product);
+        System.out.println("Total Seller: " + totalSellers + " (It can be added later)");
 
-        // yakinkan user dengan data yang akan diinput
-        if (!menu.getYesOrNo("Are you sure with the data")) {
-            menu.main(this);
-            input.close();
-            return;
+        // data untuk input seller, initializeSeller()
+        JSONObject sellers = new JSONObject();
+        System.out.println("Input Sellers Data");
+        for (int i = 0; i < totalSellers; i++) {
+            System.out.print("Seller " + (i + 1) + " Name: ");
+            String sellerName = input.next();
+
+            Seller seller = new Seller(sellerName);
+            sellers.put(sellerName, seller.toJson());
         }
-
         // pembuatan db untuk kelola data
         System.out.print("Input file database name (DB-<dd-mm-yyyy>): ");
         databaseFileName = input.next();
@@ -106,8 +99,36 @@ public class App {
         dbDirectoryPath = "src/main/resources/database/";
         dbFilePath = dbDirectoryPath + databaseFileName + ".json";
 
-        updateDatabase(dbDirectoryPath, dbFilePath);
-        
+        // yakinkan user dengan data yang akan diinput
+        if (!menu.getYesOrNo("Are you sure with the data")) {
+            menu.main(this);
+            input.close();
+            return;
+        }
+
+          // buat file json sebagai db baru, input data ke json
+          JSONObject db = new JSONObject();
+
+          db.put("capital", capital);
+          db.put("product", product);
+          db.put("revenue", revenue);
+          db.put("profit", profit);  
+          db.put("totalSellers", totalSellers);
+          db.put("sellers", sellers);
+  
+          // cek folder, buat folder jika belum ada
+          File directory = new File(dbDirectoryPath);
+          if (!directory.exists()) {
+              directory.mkdirs();
+          }
+  
+          // simpan ke file json
+          try (FileWriter fileWriter = new FileWriter(dbFilePath)) {
+              fileWriter.write(db.toString());
+              fileWriter.flush();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
         // apakah user ingin membuka file yang baru saja dibuat?
         if (menu.getYesOrNo(databaseFileName + " is created, do you want to open it?")) {
             menu.dataFileMenu(this, databaseFileName);
@@ -121,7 +142,6 @@ public class App {
     public void showsField() {
         Scanner input = new Scanner(System.in);
         Menu menu = new Menu();
-
         System.out.print("Input database file to open (DB-<dd-mm-yyyy>): ");
         databaseFileName = input.next();
 
@@ -150,10 +170,6 @@ public class App {
                     
                     Number profitNumber = (Number) db.get("profit");
                     profit = profitNumber.intValue();
-
-                    JSONObject customers = (JSONObject) db.get("customers");
-                    customerPackageOne = (JSONArray) customers.get("package-one");
-                    customerPackageTwo = (JSONArray) customers.get("package-two");
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.exit(0);
@@ -177,6 +193,9 @@ public class App {
 
     @SuppressWarnings("unchecked")
     private void updateDatabase(String dbDirectoryPath, String dbFilePath) {
+        // this function is made to update selected connected db.json whenever this app field data is changed
+        // the algorithm is just get this current data field and store to db
+
         // buat file json sebagai db baru, input data ke json
         JSONObject db = new JSONObject();
 
@@ -184,13 +203,6 @@ public class App {
         db.put("product", product);
         db.put("revenue", revenue);
         db.put("profit", profit);
-
-        // data customer
-        JSONObject customers = new JSONObject();
-
-        customers.put("package-one", customerPackageOne);
-        customers.put("package-two", customerPackageTwo);
-        db.put("customers", customers);
 
 
         // cek folder, buat folder jika belum ada
@@ -205,6 +217,48 @@ public class App {
             fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    class Seller {
+        private String name;
+        public String getName() {
+            return name;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        private JSONArray packageOne = new JSONArray();
+        public JSONArray getpackageOne () {
+            return packageOne;
+        }
+        @SuppressWarnings("unchecked")
+        public void addpackageOne (String customerName) {
+            packageOne.add(customerName);
+            updateDatabase(dbDirectoryPath, dbFilePath);
+        }
+    
+        private JSONArray packageTwo = new JSONArray();
+        public JSONArray getpackageTwo () {
+            return packageTwo;
+        }
+        @SuppressWarnings("unchecked")
+        public void addpackageTwo (String customerName) {
+            packageTwo.add(customerName);
+            updateDatabase(dbDirectoryPath, dbFilePath);
+        }
+
+        public Seller(String name) {
+            this.name = name;
+        }
+
+        @SuppressWarnings("unchecked")
+        public JSONObject toJson() {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("packageOne", packageOne);
+            jsonObject.put("packageTwo", packageTwo);
+            return jsonObject;
         }
     }
 }

@@ -1,0 +1,11 @@
+{
+  "capital": 50000,
+  "product": 9,
+  "revenue": 8000,
+  "profit": 0,
+  "sellers": {
+    "Mike": { "packageTwo": [], "packageOne": ["Yuan"] },
+    "Sarah": { "packageTwo": [], "packageOne": [] }
+  },
+  "totalSellers": 2
+}
