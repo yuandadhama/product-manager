@@ -24,7 +24,7 @@ public class Menu {
         int option = input.nextInt();
 
         switch (option) {
-            case 1 -> app.createField();
+            case 1 -> app.createNewDb();
             case 2 -> app.showsField();
             default -> {
                 System.err.println("Unexpected Value: " + option + "choose the appropriate option");
