@@ -1,10 +1,14 @@
-package com.util.AppUtils;
+package com.utils.AppUtils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
@@ -65,9 +69,8 @@ public class CreateNewDbUtils {
         JSONObject sellers = new JSONObject(sellersMap);
         return sellers;
     }
-    
-    static int indexDuplication = 1;
-    public static void createDbFile(App app) throws IOException {
+
+    public static void createDbFile(App app) {
         // title
         System.out.println("== Creating File Databse ==");
 
@@ -79,23 +82,32 @@ public class CreateNewDbUtils {
 
         // set nama untuk file database berdasarkan tanggal pembuatan
         LocalDate date = LocalDate.now();
-        String dbName = "DB-" + date.getDayOfMonth() + "-" + date.getMonthValue() + "-" + date.getYear();
+        String baseFileName = String.format("DB-%d-%d-%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+        final String FILE_EXTENSION = ".json";
 
-        // set nama file database jika ada yang sama
+        // field untuk menampung nama file yang sudah di format
+        String dbName = null;
+
+        // pembuatan format duplikasi jika ada nama yang sama
         File[] listDirectoryFiles = dirDataFile.listFiles();
-        for (File file : listDirectoryFiles) {
-            if (file.getName().equals(dbName + ".json")) {
-                indexDuplication++;
-                if (dbName.contains("_(" + indexDuplication + ")")) {
-                    dbName = dbName.replace("_(" + indexDuplication + ")", "_(" + (indexDuplication) + ")");
-                } else {
-                    dbName += "_(" + indexDuplication + ")";
-                }
-            }
+
+        if (listDirectoryFiles == null || listDirectoryFiles.length == 0) {
+            dbName = baseFileName;
         }
 
-        // buat file baru dengan format yang telah  otomatis dibuat
-        File file = new File(dirDataFile, dbName + ".json");
+        List<String> existingFileNames = new ArrayList<>();
+        for (File file : listDirectoryFiles) {
+            existingFileNames.add(file.getName());
+        }
+        
+        int indexDuplication = 2;
+        while (existingFileNames.contains(listDirectoryFiles + FILE_EXTENSION)) {
+            dbName = String.format("%s_(d)", baseFileName, indexDuplication);
+            indexDuplication++;
+        }
+
+        // buat file baru dengan format yang telah otomatis dibuat
+        File file = new File(dirDataFile, dbName + FILE_EXTENSION);
 
         // tampilkan nama file yang akan dibuat
         System.out.println("Your New Database Filename: " + dbName);
@@ -112,7 +124,7 @@ public class CreateNewDbUtils {
         // hashmap untuk membangun database
         HashMap<String, Object> appDataMap = new HashMap<String, Object>();
 
-        // tambahkan data ke hashmap 
+        // tambahkan data ke hashmap
         appDataMap.put("capital", app.getCapital());
         appDataMap.put("product", app.getProduct());
         appDataMap.put("revenue", app.getRevenue());

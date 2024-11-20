@@ -168,8 +168,26 @@ public class Menu {
     }
 
     public boolean getYesOrNo(String validation) {
+        // tampilkan validasi
         System.out.print(validation + " (y/n): ");
         String answer = input.next().toLowerCase();
+
+        // jika input yang dimasukkan tidak sesuai aturan (y/n)
+        if (!answer.equals("y") && !answer.equals("n")) {
+            
+            // tampilkan pesan error
+            System.err.println("Unexpected Value: " + answer);
+            System.out.println("Choose the apprpriate option (y/n)");
+
+            // spasi kosong
+            System.out.println();
+
+            // tanya ulang
+            return this.getYesOrNo(validation);
+        }
+
+        // spasi kosong
+        System.out.println();
         return answer.equals("y");
     }
 

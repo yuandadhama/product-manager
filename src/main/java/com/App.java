@@ -12,7 +12,7 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.util.AppUtils.CreateNewDbUtils;
+import com.utils.AppUtils.CreateNewDbUtils;
 
 public class App {
     // database conncetion field
@@ -96,7 +96,9 @@ public class App {
 
         if (!menu.getYesOrNo("Are you sure with the data")) {
             menu.main(this);
-            input.close();
+
+            // empty space
+            System.out.println();
             return;
         }
 

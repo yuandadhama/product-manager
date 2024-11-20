@@ -1,15 +1,15 @@
-package com.util.AppUtils;
+package com.model;
 
 import java.util.HashMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Seller {
+public class SellerModel {
     private String name;
     private JSONArray packageOne = new JSONArray();
     private JSONArray packageTwo = new JSONArray();
 
-    public Seller(String name) {
+    public SellerModel(String name) {
         this.name = name;
     }
 
@@ -18,10 +18,9 @@ public class Seller {
     }
 
     public JSONObject toJson() {
-        HashMap<String, JSONArray> map = new HashMap<String, JSONArray>();
+        HashMap<String, JSONArray> map = new HashMap<>();
         map.put("package-one", packageOne);
         map.put("package-two", packageTwo);
-        JSONObject jsonObject = new JSONObject(map);
-        return jsonObject;
+        return new JSONObject(map);
     }
 }
