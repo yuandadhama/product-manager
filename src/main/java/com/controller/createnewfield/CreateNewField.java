@@ -3,8 +3,12 @@ package com.controller.createnewfield;
 import java.io.IOException;
 
 import com.controller.AppController;
+import com.controller.createnewfield.utilities.CreateFile;
+import com.controller.createnewfield.utilities.InitializeSeller;
+import com.controller.createnewfield.utilities.SetData;
+import com.controller.createnewfield.utilities.WriteData;
 import com.model.DatabaseModel;
-import com.utils.Util;
+import com.util.Util;
 import com.view.AppView;
 
 public class CreateNewField {
@@ -23,7 +27,7 @@ public class CreateNewField {
         InitializeSeller.function(databaseModel);
 
         // tanya apakah data sudah benar -> buat file baru
-        if (Util.getYesOrNo(databaseModel.getDbFileName() + " is created, do you want to open it?")) {
+        if (Util.getYesOrNo("Are you sure with the data?")) {
             CreateFile.function(databaseModel);
         } else {
             return;
@@ -33,14 +37,14 @@ public class CreateNewField {
         try {
             WriteData.function(databaseModel);
         } catch (IOException e) {
-            System.out.println("Cannot write the data");
+            Util.println("Cannot write the data");
             e.printStackTrace();
         }
 
         // tanya user apakah ingin membuka file yang dibuat
         if (Util.getYesOrNo(databaseModel.getDbFileName() + " is created, do you want to open it?")) {
             // view.showfield()
-            System.out.println("file is opened");
+            Util.println("file is opened");
         } else {
             view.mainMenu(new AppController());
         }

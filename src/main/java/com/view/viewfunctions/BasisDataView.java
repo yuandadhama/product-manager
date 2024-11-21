@@ -1,6 +1,6 @@
 package com.view.viewfunctions;
 
-import com.utils.Util;
+import com.util.Util;
 
 public class BasisDataView {
     private BasisDataView() {
@@ -10,12 +10,12 @@ public class BasisDataView {
         Util.clearScreen();
 
         // menampilkan data dari function setData
-        System.out.println("== Creating New DB ==");
-        System.out.println("Capital: " + capital);
-        System.out.println("Products: " + product);
-        System.out.println("Total Seller: " + totalSellers);
+        Util.println("== Creating New DB ==");
+        Util.println("Capital: " + capital);
+        Util.println("Products: " + product);
+        Util.println("Total Seller: " + totalSellers);
 
         // empty space
-        System.out.println();
+        Util.println("");
     }
 }

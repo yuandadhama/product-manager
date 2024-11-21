@@ -1,4 +1,4 @@
-package com.controller.createnewfield;
+package com.controller.createnewfield.utilities;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.DatabaseModel;
+import com.util.Util;
 
 public class CreateFile {
     private CreateFile() {
@@ -15,7 +16,7 @@ public class CreateFile {
     private static final String FILE_EXTENSION = ".json";
     public static void function(DatabaseModel databaseModel) {
         // title
-        System.out.println("== Creating File Databse ==");
+        Util.println("== Creating File Database = ");
 
         // field untuk menampung nama file yang sudah di format
         String dbName = generateName(databaseModel);
@@ -24,14 +25,14 @@ public class CreateFile {
         File file = new File(databaseModel.getDbDirectoryPath(), dbName + FILE_EXTENSION);
 
         // tampilkan nama file yang akan dibuat
-        System.out.println("Your New Database Filename: " + dbName);
+        Util.println("Your New Database Filename: " + dbName);
 
         // set field di model agar sesuai dengan file database yang terkoneksi
         databaseModel.setDbFileName(dbName);
         databaseModel.setDbFilePath(file.getAbsolutePath());
 
         // empty space
-        System.out.println();
+        Util.emptySpace();
     }
 
     private static String generateName(DatabaseModel databaseModel) {
@@ -61,11 +62,13 @@ public class CreateFile {
         
         // ketika ada nama yang sama, sesuikan nama index duplikat
         int indexDuplication = 2;
-        while (existingFileNames.contains(listDirectoryFiles + FILE_EXTENSION)) {
-            baseFileName = String.format("%s_(%d)", baseFileName, indexDuplication);
+        String finalFileName = baseFileName;
+
+        while (existingFileNames.contains(finalFileName + FILE_EXTENSION)) {
+            finalFileName = String.format("%s_(%d)", baseFileName, indexDuplication);
             indexDuplication++;
         }
 
-        return baseFileName;
+        return finalFileName;
     }
 }

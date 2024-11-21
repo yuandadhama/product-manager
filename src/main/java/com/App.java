@@ -12,7 +12,7 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.utils.AppUtils.CreateNewDbUtils;
+import com.util.AppUtils.CreateNewDbUtils;
 
 public class App {
     // database conncetion field
@@ -118,7 +118,7 @@ public class App {
         }
         input.close();
     }
-
+// 
     public void showsField() {
         // set alamat folder dan file untuk db yang akan ditampilkan
 

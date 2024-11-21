@@ -13,7 +13,7 @@ public class AppController {
     }
 
     public void showExistingField() {
-        ShowExistingField.function();
+        ShowExistingField.function(databaseModel, appView);
     }
 }
 

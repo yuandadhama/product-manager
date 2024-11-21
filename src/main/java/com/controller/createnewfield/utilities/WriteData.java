@@ -1,4 +1,4 @@
-package com.controller.createnewfield;
+package com.controller.createnewfield.utilities;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class WriteData {
         FileWriter fileWriter = new FileWriter(databaseModel.getDbFilePath());
 
         fileWriter.write(jsonObject.toJSONString());
-        
+
         fileWriter.close();
     }
 }
