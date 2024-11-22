@@ -31,6 +31,7 @@ public class ShowDbFileNames {
 
             Collections.sort(dataFileNames);
             // title 
+            Util.clearScreen();
             Util.println("== Database List ==");
             Util.emptySpace();
 

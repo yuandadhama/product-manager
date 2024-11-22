@@ -21,14 +21,9 @@ public class ShowExistingField {
 
         GetDataFromDb.function(databaseModel, dbFile);
 
-        System.out.println(databaseModel.getCapital());
-
-        System.out.println(databaseModel.getProduct());
+        ShowDataDbFIle.function(databaseModel, view);
 
         Util.getUserInt("");
-
-        // ShowDataDbFile.function(databaseModel, view);
-
     }
 }
 

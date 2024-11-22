@@ -33,13 +33,17 @@ public class SelectDbFile {
                 Util.emptySpace();
             }
 
+            Util.emptySpace();
             int desiredIndexFile = Util.getUserInt("Choose file database to open: ");
+            Util.emptySpace();
 
             // cek apakah input user tidak ada di urutan
             if (desiredIndexFile < 1 || desiredIndexFile > dirDataFileList.length) {
                 showWarning = true;
             } else {
-                return dataFileNames.get(desiredIndexFile - 1);
+                String selectedFileName = dataFileNames.get(desiredIndexFile - 1);
+                databaseModel.setDbFileName(selectedFileName.replaceAll(".json", ""));
+                return selectedFileName;
             }
         }
     }

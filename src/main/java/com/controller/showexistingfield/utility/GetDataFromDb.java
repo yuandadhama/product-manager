@@ -27,7 +27,6 @@ public class GetDataFromDb {
             JSONParser jsonParser = new JSONParser();
             JSONObject db = (JSONObject) jsonParser.parse
             (reader);   
-
             // ambil data dari file database untuk ditampilkan
             // convert and set data
             databaseModel.setCapital(((Number) db.get("capital")).intValue());
