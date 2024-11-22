@@ -3,7 +3,6 @@ package com.controller.showexistingfield;
 import com.controller.showexistingfield.utility.*;
 
 import com.model.DatabaseModel;
-import com.util.Util;
 import com.view.AppView;
 
 public class ShowExistingField {
@@ -23,7 +22,7 @@ public class ShowExistingField {
 
         ShowDataDbFIle.function(databaseModel, view);
 
-        Util.getUserInt("");
+        NextPlan.function(view);
     }
 }
 

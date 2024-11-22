@@ -17,6 +17,14 @@ public class ShowDbView {
         Util.println("(2) Quantity of Products: " + quantityProduct);
         Util.println("(3) Revenue: " + revenue);
         Util.println("(4) Profit: " + profit);
+
+        Util.emptySpace();
+        Util.println("== Options ==");
+        Util.println("(1) Add Customer");
+        Util.println("(2) Restock");
+        Util.println("(3) Info Seller");
+        Util.println("(4) Back to Main Menu");
+
         Util.emptySpace();
     }
 }

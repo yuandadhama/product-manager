@@ -1,1 +1,13 @@
-{"capital":1,"product":12,"revenue":0,"profit":0,"sellers":{"y":{"package-one":[],"package-two":[]}},"totalSellers":1}
+{
+    "capital": 100000,
+    "product": 20,
+    "revenue": 0,
+    "profit": 0,
+    "sellers": {
+        "Tom": {
+            "package-one": [],
+            "package-two": []
+        }
+    },
+    "totalSellers": 1
+}   

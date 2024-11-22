@@ -22,7 +22,7 @@ public class ShowDbFileNames {
         // ambil file-file didalamnya
         File[] dirDataFileList = dirDataFile.listFiles();
 
-        if (dirDataFileList != null) {
+        if (dirDataFileList != null && dirDataFileList.length > 0) {
             List<String> dataFileNames = new ArrayList<>();
 
             for (File file : dirDataFileList) {

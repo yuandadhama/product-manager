@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.controller.addcustomer.AddCustomer;
 import com.controller.createnewfield.CreateNewField;
 import com.controller.showexistingfield.ShowExistingField;
 import com.model.DatabaseModel;
@@ -14,6 +15,18 @@ public class AppController {
 
     public void showExistingField() {
         ShowExistingField.function(databaseModel, appView);
+    }
+
+    public void addCustomer() {
+        AddCustomer.function(databaseModel, appView);
+    }
+
+    public void restock() {
+
+    }
+
+    public void infoSeller() {
+
     }
 }
 

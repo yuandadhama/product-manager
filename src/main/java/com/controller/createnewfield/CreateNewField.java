@@ -43,9 +43,15 @@ public class CreateNewField {
 
         // tanya user apakah ingin membuka file yang dibuat
         if (Util.getYesOrNo(databaseModel.getDbFileName() + " is created, do you want to open it?")) {
-            // view.showfield()
-            Util.println("file is opened");
+            // tampilkan data dengan view
+            view.showDbView(
+                    databaseModel.getDbFileName(),
+                    databaseModel.getCapital(), 
+                    databaseModel.getProduct(),
+                    databaseModel.getRevenue(), 
+                    databaseModel.getProfit());
         } else {
+            // kembali ke main menu
             view.mainMenu(new AppController());
         }
     }

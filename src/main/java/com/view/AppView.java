@@ -1,9 +1,9 @@
 package com.view;
 
+import java.util.List;
+
 import com.controller.AppController;
-import com.view.viewfunctions.BasisDataView;
-import com.view.viewfunctions.MainMenu;
-import com.view.viewfunctions.ShowDbView;
+import com.view.viewfunctions.*;
 
 public class AppView {
     public void mainMenu(AppController controller) {
@@ -16,5 +16,13 @@ public class AppView {
 
     public void showDbView(String dbFileName, int capital, int product, int revenue, int profit) {
         ShowDbView.show(dbFileName, capital, product, revenue, profit);
+    }
+
+    public void packagesView() {
+        PackagesView.show();
+    }
+
+    public void sellersView(List<String> sellerNames) {
+        SellersListView.show();
     }
 }
