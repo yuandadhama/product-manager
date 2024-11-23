@@ -1,7 +1,5 @@
 package com.controller.addcustomer;
 
-import org.json.simple.JSONObject;
-
 import com.controller.AppController;
 import com.controller.addcustomer.utility.*;
 import com.model.DatabaseModel;
@@ -13,8 +11,10 @@ public class AddCustomer {
         throw new IllegalStateException("Utility class");
     }
     public static void function(DatabaseModel databaseModel, AppView view) {
-        int selectedPackage = SelectPackage.function(view);
-        JSONObject selectedSeller = SelectSeller.function(databaseModel, view);
+        int selectedPackage = SelectPackage.function(databaseModel, view);
+        String selectedSeller = SelectSeller.function(databaseModel, view);
+
+        Util.emptySpace();
         String customerName = Util.getUserString("Input Customer Name: ");
 
         ExecuteData.function(databaseModel, selectedPackage, selectedSeller, customerName);

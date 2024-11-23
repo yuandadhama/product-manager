@@ -10,6 +10,8 @@ public class SellersListView {
     }
 
     public static void show(List<String> sellerNames) {
+        Util.emptySpace();
+        Util.println("== Seller List ==");
         Collections.sort(sellerNames);
 
         int order = 1;

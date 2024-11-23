@@ -13,10 +13,10 @@ public class ShowDbView {
         Util.println("== " + dbName + " ==");
         Util.emptySpace();
         
-        Util.println("(1) Capital: " + capital);
-        Util.println("(2) Quantity of Products: " + quantityProduct);
-        Util.println("(3) Revenue: " + revenue);
-        Util.println("(4) Profit: " + profit);
+        Util.println("(1) Capital: " + Util.formatNumber(capital));
+        Util.println("(2) Quantity of Products: " + Util.formatNumber(quantityProduct));
+        Util.println("(3) Revenue: " + Util.formatNumber(revenue));
+        Util.println("(4) Profit: " + Util.formatNumber(profit));
 
         Util.emptySpace();
         Util.println("== Options ==");

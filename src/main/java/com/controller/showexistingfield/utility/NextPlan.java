@@ -9,12 +9,23 @@ public class NextPlan {
     private NextPlan() {
         throw new IllegalStateException("Utility class");
     }
+
     public static void function(DatabaseModel databaseModel, AppView view) {
+        boolean showWarning = false;
         while (true) {
+            showField(databaseModel, view);
+
+            if (showWarning) {
+                Util.println("Cannot add customer, out of stock");
+            }
             int option = Util.getUserInt("Choose option: ");
-    
+
             if (option == 1) {
-                new AppController().addCustomer();
+                if (databaseModel.getProductQuantity() > 0) {
+                    new AppController().addCustomer();
+                } else {
+                    showWarning = true;
+                }
             } else if (option == 2) {
                 new AppController().restock();
             } else if (option == 3) {
@@ -25,5 +36,15 @@ public class NextPlan {
                 Util.println("Unexpected Value: " + option + " choose the appropriate option");
             }
         }
+    }
+
+    private static void showField(DatabaseModel databaseModel, AppView view) {
+        String dbFileNames = databaseModel.getDbFileName();
+        int capital = databaseModel.getCapital();
+        int quantityProduct = databaseModel.getProductQuantity();
+        int revenue = databaseModel.getRevenue();
+        int profit = databaseModel.getProfit();
+
+        view.showDbView(dbFileNames, capital, quantityProduct, revenue, profit);
     }
 }

@@ -30,8 +30,6 @@ public class ShowExistingField {
 
         GetDataFromDb.function(databaseModel, dbFile);
 
-        ShowDataDbFile.function(databaseModel, view);
-
         NextPlan.function(databaseModel, view);
     }
 }

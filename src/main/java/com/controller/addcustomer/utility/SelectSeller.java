@@ -16,7 +16,7 @@ public class SelectSeller {
         throw new IllegalStateException("Utility class");
     }
 
-    public static JSONObject function(DatabaseModel databaseModel, AppView view) {
+    public static String function(DatabaseModel databaseModel, AppView view) {
         String dbFilePath = databaseModel.getDbFilePath();
         try (FileReader fileReader = new FileReader(dbFilePath)) {
             JSONParser jsonParser = new JSONParser();
@@ -37,19 +37,20 @@ public class SelectSeller {
             return null;
         }
     }
-    private static JSONObject selectSeller(JSONObject sellersDb, List<String> sellerNames) {
+    private static String selectSeller(JSONObject sellersDb, List<String> sellerNames) {
         boolean showWarning = false;
         while (true) {
             if (showWarning) {
                 Util.println("Please choose the appropriate seller: 1 " + (sellerNames.size() > 1 ? "- " + sellerNames.size() : ""));
             }
+            Util.emptySpace();
             int sellerIndex = Util.getUserInt("Choose seller: ");
 
             if (sellerIndex < 1 || sellerIndex > sellerNames.size()) {
-               showWarning = true; 
+                showWarning = true; 
             } else {
                 String sellerName = sellerNames.get(sellerIndex - 1);
-                return (JSONObject) sellersDb.get(sellerName);
+                return sellerName;
             }
         }
     }

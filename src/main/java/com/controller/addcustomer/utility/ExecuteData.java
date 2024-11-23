@@ -10,7 +10,7 @@ public class ExecuteData {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void function(DatabaseModel databaseModel, int selectedPackage, JSONObject selectedSeller, String customerName) {
+    public static void function(DatabaseModel databaseModel, int selectedPackage, String selectedSeller, String customerName) {
         int revenue = databaseModel.getRevenue();
         int quantityProduct = databaseModel.getProductQuantity();
         JSONObject sellersDb = new JSONObject(databaseModel.getSellers());
@@ -44,16 +44,17 @@ public class ExecuteData {
     }
 
     @SuppressWarnings("unchecked")
-    private static void setCustomerData(DatabaseModel databaseModel, JSONObject sellersDb, JSONObject selectedSeller, String customerName, String packageString) {
-        // ambil package 
-        JSONArray packageArray = (JSONArray) selectedSeller.get(packageString);
+    private static void setCustomerData(DatabaseModel databaseModel, JSONObject sellersDb, String sellerName, String customerName, String packageString) {
 
+        // ambil package 
+        JSONObject sellerObject = (JSONObject) sellersDb.get(sellerName);
+        JSONArray packageArray = (JSONArray) sellerObject.get(packageString);
+ 
         // tambahkan data customer di package data
         packageArray.add(customerName);
-
+    
         // tambahkan package ke database seller
-        selectedSeller.put(packageString, packageArray);
-        sellersDb.put(selectedSeller, packageArray);
+        sellersDb.put(sellerName, sellerObject);
 
         // simpan data JSONObject di database model
         databaseModel.setSellers(sellersDb);

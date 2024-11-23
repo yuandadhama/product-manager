@@ -16,6 +16,8 @@ public class WriteDataToDb {
             JSONObject db = Util.readFileToJson(databaseModel.getDbFilePath());
             db.put("product", databaseModel.getProductQuantity());
             db.put("revenue", databaseModel.getRevenue());
+            db.put("profit", databaseModel.getProfit());
+            db.put("sellers", databaseModel.getSellers());
             
             Util.writeJsonToFile(db, databaseModel.getDbFilePath());
         } catch (Exception e) {

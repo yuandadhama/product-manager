@@ -13,19 +13,20 @@ public class GetUserInt {
 
     public static int function(String str) {
         while (true) {
+            // Read the input as a string
             Util.print(str);
+            String input = scanner.nextLine().trim();
             try {
                 // Read and return the integer input
-                int input = scanner.nextInt();
-                if (input <= 0) {
+                int number = Integer.parseInt(input);
+
+                if (number > 0) {
+                    return number; // Return valid input
+                } else {
                     Util.println("Please enter a positive integer.");
                     Util.emptySpace();
-                } else {
-                    return input;
                 }
             } catch (Exception e) {
-                // Clear the invalid input from the buffer
-                scanner.nextLine();
                 Util.println("Please enter a valid integer.");
                 Util.emptySpace();
             }
