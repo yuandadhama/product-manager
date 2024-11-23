@@ -38,7 +38,7 @@ public class Menu {
         this.clearScreen();
         System.out.println("========== " + databaseName + " ==========");
         System.out.println("Capital: " + app.getCapital());
-        System.out.println("Product: " + app.getProduct());
+        System.out.println("Product: " + app.getProductQuantity());
         System.out.println("Revenue: " + app.getRevenue());
         System.out.println("Profit: " + app.getProfit());
         System.out.println("========== Option ==========");
@@ -86,13 +86,8 @@ public class Menu {
                 sellersDb = (JSONObject) db.get("sellers");
 
                 List<String> sellerKeys = new ArrayList<>(sellersDb.keySet());
-
-                int order = 1;
-                for (String seller : sellerKeys) {
-                    System.out.println("("+order+") " + seller);
-                    order++;
-                }
-
+                view.SellersListView(sellerKeys);
+                
                 System.out.print("Choose seller: ");
                 int sellerIndex = input.nextInt() - 1;
 
@@ -114,7 +109,7 @@ public class Menu {
         String customerName = input.next();
 
         int revenue = app.getRevenue();
-        int product = app.getProduct();
+        int product = app.getProductQuantity();
 
         switch (option) {
             case 1 -> {

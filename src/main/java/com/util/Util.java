@@ -1,9 +1,11 @@
 package com.util;
 
-import com.util.utilsfunction.ClearScreen;
-import com.util.utilsfunction.GetUserInt;
-import com.util.utilsfunction.GetUserString;
-import com.util.utilsfunction.GetYesOrNo;
+import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
+import com.util.utilsfunction.*;
 
 public class Util {
     private Util() {
@@ -58,6 +60,25 @@ public class Util {
         System.out.println();
     }
 
+    /**
+     * read a file and convert the data into JSONObject from filePath (str)
+     * 
+     * @param filePath to be Read
+     * @return JSONObject
+     */
+    public static JSONObject readFileToJson(String filePath) throws IOException, ParseException {
+        return ReadFileToJson.function(filePath);
+    }
+
+    /**
+     * read some jsonObject in file of FilePath
+     * 
+     * @param jsonObject to be written
+     * @param filePath to store data of jsonObject
+     */
+    public static void writeJsonToFile(JSONObject jsonObject, String filePath) throws IOException {
+        WriteJsonToFile.function(jsonObject, filePath);
+    }
     /**
      * clean all the written message in terminal
      */

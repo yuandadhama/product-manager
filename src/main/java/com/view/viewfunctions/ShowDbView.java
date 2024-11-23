@@ -20,6 +20,8 @@ public class ShowDbView {
 
         Util.emptySpace();
         Util.println("== Options ==");
+        Util.emptySpace();
+        
         Util.println("(1) Add Customer");
         Util.println("(2) Restock");
         Util.println("(3) Info Seller");

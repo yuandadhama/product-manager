@@ -12,7 +12,7 @@ public class DatabaseModel {
     // application field
     private int totalSellers;
     private int capital;
-    private int product;
+    private int productQuantity;
     private int revenue;
     private int profit;
 
@@ -35,8 +35,8 @@ public class DatabaseModel {
     public int getCapital() {
         return capital;
     }
-    public int getProduct() {
-        return product;
+    public int getProductQuantity() {
+        return productQuantity;
     }
     public int getRevenue() {
         return revenue;
@@ -61,8 +61,8 @@ public class DatabaseModel {
     public void setCapital(int capital) {
         this.capital = capital;
     }
-    public void setProduct(int product) {
-        this.product = product;
+    public void setProductQuantity(int product) {
+        this.productQuantity = product;
     }
     public void setRevenue(int revenue) {
         this.revenue = revenue;

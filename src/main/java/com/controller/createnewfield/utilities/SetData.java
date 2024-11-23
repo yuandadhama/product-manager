@@ -16,7 +16,7 @@ public class SetData {
 
         // Input 3 basis data
         database.setCapital(Util.getUserInt("Input Capital: "));
-        database.setProduct(Util.getUserInt("Input Total Product: "));
+        database.setProductQuantity(Util.getUserInt("Input Total Product: "));
 
         database.setTotalSellers(Util.getUserInt("Input how many sellers: "));
     }

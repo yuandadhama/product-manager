@@ -4,17 +4,23 @@ import com.controller.addcustomer.AddCustomer;
 import com.controller.createnewfield.CreateNewField;
 import com.controller.showexistingfield.ShowExistingField;
 import com.model.DatabaseModel;
+
 import com.view.AppView;
 
 public class AppController {
-    private final DatabaseModel databaseModel = new DatabaseModel();
-    private final AppView appView = new AppView();
+    private static final DatabaseModel databaseModel = new DatabaseModel();
+    private static final AppView appView = new AppView();
     public void createNewField() {
         CreateNewField.function(databaseModel, appView);
     }
 
-    public void showExistingField() {
-        ShowExistingField.function(databaseModel, appView);
+    /**
+     * show data from database model
+     * 
+     * @param isShowingDbList true, showing db list to open. false, showing data field directly.
+     */
+    public void showExistingField(boolean isShowingDbList) {
+        ShowExistingField.function(databaseModel, appView, isShowingDbList);
     }
 
     public void addCustomer() {

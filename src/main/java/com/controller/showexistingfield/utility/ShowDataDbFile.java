@@ -3,8 +3,8 @@ package com.controller.showexistingfield.utility;
 import com.model.DatabaseModel;
 import com.view.AppView;
 
-public class ShowDataDbFIle {
-    private ShowDataDbFIle() {
+public class ShowDataDbFile {
+    private ShowDataDbFile() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -12,7 +12,7 @@ public class ShowDataDbFIle {
 
         String dbFileNames = databaseModel.getDbFileName();
         int capital = databaseModel.getCapital();
-        int quantityProduct = databaseModel.getProduct();
+        int quantityProduct = databaseModel.getProductQuantity();
         int revenue = databaseModel.getRevenue();
         int profit = databaseModel.getProfit();
 

@@ -22,7 +22,7 @@ public class AppView {
         PackagesView.show();
     }
 
-    public void sellersView(List<String> sellerNames) {
-        SellersListView.show();
+    public void sellersListView(List<String> sellerNames) {
+        SellersListView.show(sellerNames);
     }
 }

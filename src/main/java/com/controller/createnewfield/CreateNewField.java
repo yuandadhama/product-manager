@@ -1,12 +1,7 @@
 package com.controller.createnewfield;
 
-import java.io.IOException;
-
 import com.controller.AppController;
-import com.controller.createnewfield.utilities.CreateFile;
-import com.controller.createnewfield.utilities.InitializeSeller;
-import com.controller.createnewfield.utilities.SetData;
-import com.controller.createnewfield.utilities.WriteData;
+import com.controller.createnewfield.utilities.*;
 import com.model.DatabaseModel;
 import com.util.Util;
 import com.view.AppView;
@@ -21,7 +16,7 @@ public class CreateNewField {
         SetData.function(databaseModel);
 
         // tampilkan basis data (modal, jumlah product, total seller)
-        view.basisData(databaseModel.getCapital(), databaseModel.getProduct(), databaseModel.getTotalSellers());
+        view.basisData(databaseModel.getCapital(), databaseModel.getProductQuantity(), databaseModel.getTotalSellers());
 
         // inisiasi nama-nama seller, berdasarkan total seller
         InitializeSeller.function(databaseModel);
@@ -34,22 +29,11 @@ public class CreateNewField {
         }
 
         // menulis data yang sudah di input ke dalam file
-        try {
-            WriteData.function(databaseModel);
-        } catch (IOException e) {
-            Util.println("Cannot write the data");
-            e.printStackTrace();
-        }
+        WriteData.function(databaseModel);
 
         // tanya user apakah ingin membuka file yang dibuat
         if (Util.getYesOrNo(databaseModel.getDbFileName() + " is created, do you want to open it?")) {
-            // tampilkan data dengan view
-            view.showDbView(
-                    databaseModel.getDbFileName(),
-                    databaseModel.getCapital(), 
-                    databaseModel.getProduct(),
-                    databaseModel.getRevenue(), 
-                    databaseModel.getProfit());
+            new AppController().showExistingField(false);
         } else {
             // kembali ke main menu
             view.mainMenu(new AppController());

@@ -1,13 +1,1 @@
-{
-    "capital": 100000,
-    "product": 20,
-    "revenue": 0,
-    "profit": 0,
-    "sellers": {
-        "Tom": {
-            "package-one": [],
-            "package-two": []
-        }
-    },
-    "totalSellers": 1
-}   
+{"capital":100000,"product":17,"revenue":23000,"profit":0,"sellers":{"Tom":{"package-one":[],"package-two":[]}},"totalSellers":1}

@@ -31,7 +31,7 @@ public class MainMenu {
             // Handle menu options
             switch (option) {
                 case 1 -> controller.createNewField();
-                case 2 -> controller.showExistingField();
+                case 2 -> controller.showExistingField(true);
                 case 0 -> {
                     Util.println("Exiting Main Menu...");
                     return; // Exit the method and loop

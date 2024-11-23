@@ -9,6 +9,6 @@ public class SelectPackage {
 
     public static int function(AppView view) {
         view.packagesView();
-        return Util.getUserInt("Choose option: ");
+        return Util.getUserInt("Choose package: ");
     }
 }

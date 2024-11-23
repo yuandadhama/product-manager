@@ -1,6 +1,7 @@
 package com.controller.showexistingfield.utility;
 
 import com.controller.AppController;
+import com.model.DatabaseModel;
 import com.util.Util;
 import com.view.AppView;
 
@@ -8,7 +9,7 @@ public class NextPlan {
     private NextPlan() {
         throw new IllegalStateException("Utility class");
     }
-    public static void function(AppView view) {
+    public static void function(DatabaseModel databaseModel, AppView view) {
         while (true) {
             int option = Util.getUserInt("Choose option: ");
     

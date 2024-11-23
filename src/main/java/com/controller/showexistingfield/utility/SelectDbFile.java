@@ -12,6 +12,7 @@ public class SelectDbFile {
     private SelectDbFile() {
         throw new IllegalStateException("Utility class");
     }
+
     public static String function(DatabaseModel databaseModel) {
         // ambil database model directory nya
         File dirDataFile = new File(databaseModel.getDbDirectoryPath());
@@ -33,6 +34,7 @@ public class SelectDbFile {
                 Util.emptySpace();
             }
 
+            // ambil input user
             Util.emptySpace();
             int desiredIndexFile = Util.getUserInt("Choose file database to open: ");
             Util.emptySpace();
@@ -41,6 +43,7 @@ public class SelectDbFile {
             if (desiredIndexFile < 1 || desiredIndexFile > dirDataFileList.length) {
                 showWarning = true;
             } else {
+                // set koneksi database
                 String selectedFileName = dataFileNames.get(desiredIndexFile - 1);
                 databaseModel.setDbFileName(selectedFileName.replaceAll(".json", ""));
                 return selectedFileName;

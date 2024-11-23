@@ -14,7 +14,7 @@ public class SellersListView {
 
         int order = 1;
         for (String seller : sellerNames) {
-            Util.println(String.format("(%d) $s", order, seller));
+            Util.println(String.format("(%d) %s", order, seller));
             order++;
         }
     }
