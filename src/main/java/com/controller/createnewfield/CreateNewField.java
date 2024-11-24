@@ -1,6 +1,7 @@
 package com.controller.createnewfield;
 
 import com.controller.AppController;
+import com.controller.common.ConvertModelToField;
 import com.controller.createnewfield.utility.*;
 import com.model.DatabaseModel;
 import com.util.Util;
@@ -30,7 +31,7 @@ public class CreateNewField {
         }
 
         // menulis data yang sudah di input ke dalam file
-        WriteData.function(databaseModel);
+        ConvertModelToField.function(databaseModel);
 
         // tanya user apakah ingin membuka file yang dibuat
         if (Util.getYesOrNo(databaseModel.getDbFileName() + " is created, do you want to open it?")) {

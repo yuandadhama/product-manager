@@ -11,7 +11,7 @@ public class SelectPackage {
     public static int function(DatabaseModel databaseModel, AppView view) {
         boolean showWarning = false;
         boolean outOfProduct = false;
-        int choosenPackage = 0;
+        int chosenPackage = 0;
 
         while (true) {
             view.packagesView();
@@ -24,12 +24,12 @@ public class SelectPackage {
                 Util.println("Not enough products in stock for package 2");
             }
 
-            choosenPackage = Util.getUserInt("Choose package: ");
+            chosenPackage = Util.getUserInt("Choose package: ");
 
-            outOfProduct = ((databaseModel.getProductQuantity() == 1 && choosenPackage == 2) ? true : false);
+            outOfProduct = (databaseModel.getProductQuantity() == 1 && chosenPackage == 2);
 
             // jika opsi yang dipilih tidak di opsi package yang ditampilkan 
-            if (choosenPackage > 2 ) {
+            if (chosenPackage > 2 ) {
 
                 // tampilkan pesan peringatan
                 showWarning = true;
@@ -42,7 +42,7 @@ public class SelectPackage {
             }
 
             // jika semua data sudah valid, kembalikan datanya
-            return choosenPackage;
+            return chosenPackage;
         }
     }
 }

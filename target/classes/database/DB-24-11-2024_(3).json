@@ -1,1 +1,9 @@
-{"capital":1,"product":-1,"revenue":15000,"profit":14999,"sellers":{"Y":{"package-one":[],"package-two":["t"]}},"totalSellers":1}
+{
+  "capital": 1,
+  "product": 1,
+  "revenue": 0,
+  "uniqueKey": "20241124165735137001",
+  "profit": 0,
+  "sellers": { "T": { "package-one": [], "package-two": [] } },
+  "totalSellers": 1
+}

@@ -17,12 +17,12 @@ public class MainMenu {
             Util.emptySpace();
             Util.println("(1) Create New Field");
             Util.println("(2) Show Existing Field");
-            Util.println("(0) Exit");
+            Util.println("(3) Exit");
     
             // Get user input
             if (showWarning) {
                 Util.emptySpace();
-                Util.println("Invalid option: " + option + ", Please choose 0, 1, or 2.");
+                Util.println("Invalid option: " + option + ", Please choose 1, or 2, 3");
             }
 
             Util.emptySpace();
@@ -32,8 +32,8 @@ public class MainMenu {
             switch (option) {
                 case 1 -> controller.createNewField();
                 case 2 -> controller.showExistingField(true);
-                case 0 -> {
-                    Util.println("Exiting Main Menu...");
+                case 3 -> {
+                    Util.println("Exiting Application...");
                     return; // Exit the method and loop
                 }
                 default -> {

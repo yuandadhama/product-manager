@@ -14,13 +14,10 @@ public class ShowExistingField {
         // name file dengan .json
         String dbFile = null;
 
-        // cek apakah menampilkan dari file baru
+        // cek apakah menampilkan file untuk dipilih terlebih dahulu
         if (isShowingDbList) {
-            // kalau tidak, tampilkan nama-nama file db nya untuk dipilih
-            ShowDbFileNames.function(databaseModel, view);
-
-            // ambil file db yang akan ditampilkan datanya
-            dbFile = SelectDbFile.function(databaseModel);
+            // jika iya, ambil file db yang akan ditampilkan datanya
+            dbFile = SelectDbFile.function(databaseModel, view);
         } else {
             // jika tidak, ambil file langsung dari modelnya
             dbFile = databaseModel.getDbFileName() + ".json";

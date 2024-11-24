@@ -36,6 +36,10 @@ public class GetDataFromDb {
 
             // ambil data untuk seller json object
             databaseModel.setSellers((JSONObject) db.get("sellers"));
+
+            // set databasemodel with the unique key
+            databaseModel.setUniqueKey((String) db.get("uniqueKey"));
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);

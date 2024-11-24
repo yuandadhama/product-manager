@@ -25,4 +25,8 @@ public class AppView {
     public void sellersListView(List<String> sellerNames) {
         SellersListView.show(sellerNames);
     }
+
+    public void dbFileNamesView(List<String> fileNames) {
+        DbFileNamesView.show(fileNames);
+    }
 }

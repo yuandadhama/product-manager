@@ -16,6 +16,9 @@ public class DatabaseModel {
     private int revenue;
     private int profit;
 
+    // unique key file
+    private String uniqueKey;
+
     // sellers field
     private JSONObject sellers;
 
@@ -47,6 +50,9 @@ public class DatabaseModel {
     public JSONObject getSellers() {
         return sellers;
     }
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
 
     // setter
     public void setDbFilePath(String dbFilePath) {
@@ -73,5 +79,7 @@ public class DatabaseModel {
     public void setSellers(JSONObject sellers) {
         this.sellers = sellers;
     }
-
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
 }

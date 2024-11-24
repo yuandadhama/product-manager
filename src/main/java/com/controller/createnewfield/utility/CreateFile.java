@@ -1,9 +1,12 @@
 package com.controller.createnewfield.utility;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.model.DatabaseModel;
 import com.util.Util;
@@ -14,6 +17,9 @@ public class CreateFile {
     }
 
     private static final String FILE_EXTENSION = ".json";
+    private static final AtomicInteger counter = new AtomicInteger(0);
+    private static String lastTimestamp = "";
+
     public static void function(DatabaseModel databaseModel) {
         // title
         Util.println("== Creating File Database = ");
@@ -30,6 +36,9 @@ public class CreateFile {
         // set field di model agar sesuai dengan file database yang terkoneksi
         databaseModel.setDbFileName(dbName);
         databaseModel.setDbFilePath(file.getAbsolutePath());
+
+        // tambahkan kode unik file untuk sorting
+        databaseModel.setUniqueKey(generateUniqueKey());
 
         // empty space
         Util.emptySpace();
@@ -71,4 +80,22 @@ public class CreateFile {
 
         return finalFileName;
     }
+
+    public static synchronized String generateUniqueKey() {
+        // Get the current timestamp
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+
+        // Reset counter if timestamp changes
+        if (!timestamp.equals(lastTimestamp)) {
+            counter.set(0);
+            lastTimestamp = timestamp;
+        }
+
+        // Increment counter for uniqueness
+        int count = counter.incrementAndGet();
+
+        // Append counter to timestamp (ensures sortability)
+        return timestamp + String.format("%03d", count);
+    }
+
 }
