@@ -1,9 +1,8 @@
 package com.controller;
 
-import java.security.DrbgParameters.Reseed;
-
 import com.controller.addcustomer.AddCustomer;
 import com.controller.createnewfield.CreateNewField;
+import com.controller.infoseller.InfoSeller;
 import com.controller.restock.Restock;
 import com.controller.showexistingfield.ShowExistingField;
 import com.model.DatabaseModel;
@@ -35,7 +34,7 @@ public class AppController {
     }
 
     public void infoSeller() {
-
+        InfoSeller.function(databaseModel, appView);
     }
 }
 

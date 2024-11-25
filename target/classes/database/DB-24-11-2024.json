@@ -1,1 +1,55 @@
-{"capital":150000,"product":19,"revenue":158000,"uniqueKey":"20241124234017535001","profit":8000,"sellers":{"Tom":{"package-one":["y"],"package-two":["Dom","Dom","Random","Customer One","John doe","John Doe","t","y","y","y"]}},"totalSellers":0}
+{
+  "capital": 150000,
+  "product": 19,
+  "revenue": 158000,
+  "uniqueKey": "20241124234017535001",
+  "profit": 8000,
+  "sellers": {
+    "Tom": {
+      "package-one": ["y"],
+      "package-two": [
+        "Dom",
+        "Dom",
+        "Random",
+        "Customer One",
+        "John doe",
+        "John Doe",
+        "t",
+        "y",
+        "y",
+        "y"
+      ]
+    },
+    "Son": {
+      "package-one": ["y"],
+      "package-two": [
+        "Dom",
+        "Dom",
+        "Random",
+        "Customer One",
+        "John doe",
+        "John Doe",
+        "t",
+        "y",
+        "y",
+        "y"
+      ]
+    },
+    "Sel": {
+      "package-one": ["y"],
+      "package-two": [
+        "Dom",
+        "Dom",
+        "Random",
+        "Customer One",
+        "John doe",
+        "John Doe",
+        "t",
+        "y",
+        "y",
+        "y"
+      ]
+    }
+  },
+  "totalSellers": 0
+}
