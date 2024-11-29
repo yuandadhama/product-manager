@@ -73,7 +73,7 @@ public class SelectDbFile {
         boolean showWarning = false;
         while (true) {
             if (showWarning) {
-                Util.println("Please choose appropiate database order: 1 - " + dataFileNames.size());
+                Util.println("Please choose appropiate database order: 1" + (dataFileNames.size() > 1 ? " - " + dataFileNames.size() : ""));
             }
 
             // ambil input user

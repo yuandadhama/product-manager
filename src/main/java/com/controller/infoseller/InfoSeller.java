@@ -17,27 +17,9 @@ public class InfoSeller {
         throw new IllegalStateException("Utility Class");
     }
 
-    @SuppressWarnings("unchecked")
     public static void function(DatabaseModel databaseModel, AppView view) {
         JSONObject sellers = databaseModel.getSellers();
-        Set<String> sellerNames = sellers.keySet();
-
-        int totalMoney = 0;
-        for (String sellerName : sellerNames) {
-            Util.println(sellerName);
-            JSONObject seller = (JSONObject) sellers.get(sellerName);
-            Set<String> packages = seller.keySet();
-
-            for (String packageString : packages) {
-                Util.getUserInt(packageString);
-                JSONArray packageObject = (JSONArray) seller.get(packageString);
-                Util.println(packageObject.toString());
-            }
-
-
-
-            Util.println("test 1");
-        }
-        Util.getUserInt("wait");
+        
+        view.infoSellerView(sellers);
     }
 }

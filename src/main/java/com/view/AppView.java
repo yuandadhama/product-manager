@@ -2,6 +2,8 @@ package com.view;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import com.controller.AppController;
 import com.view.viewfunctions.*;
 
@@ -28,5 +30,9 @@ public class AppView {
 
     public void dbFileNamesView(List<String> fileNames) {
         DbFileNamesView.show(fileNames);
+    }
+
+    public void infoSellerView(JSONObject sellers) {
+        InfoSellerView.show(sellers);
     }
 }

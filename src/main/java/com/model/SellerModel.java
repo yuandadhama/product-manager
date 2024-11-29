@@ -1,11 +1,15 @@
 package com.model;
 
 import java.util.HashMap;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class SellerModel {
     private String name;
+    // private List<String> P1customer;
+    // private List<String> P2customer;
     private JSONArray packageOne = new JSONArray();
     private JSONArray packageTwo = new JSONArray();
 

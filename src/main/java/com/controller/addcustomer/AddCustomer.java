@@ -17,15 +17,15 @@ public class AddCustomer {
             String selectedSeller = SelectSeller.function(databaseModel, view);
         
             Util.emptySpace();
-            String customerName = Util.getUserString("Input Customer Name: ");
+            String customerName = Util.toTitleCase(Util.getUserString("Input Customer Name: "));
         
-            ExecuteData.function(databaseModel, selectedPackage, selectedSeller, customerName);
-
+            Util.emptySpace();
             if (Util.getYesOrNo("Are you sure with the data?")) {
+                ExecuteData.function(databaseModel, selectedPackage, selectedSeller, customerName);
                 break;
             } 
         }
-            
+        
         ConvertModelToField.function(databaseModel);  
         
         new AppController().showExistingField(false);
